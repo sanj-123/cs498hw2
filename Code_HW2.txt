@@ -1,0 +1,21 @@
+For my implementation of the latency and consistency scripts, 
+I used the requests library to send requests from my local computer 
+to the cloud instances. 
+
+For measuring latency, I used the .time() function to keep track of 
+the time before sending a GET request to each instance and after 
+getting a response, then subtracted the start and end times to get 
+the total time elapsed for the process. I iterated the test 10 times 
+and divided the total time by 10 to get the average latency. At the 
+end, I printed the average latency for each endpoint (/register and 
+/list) on each instance. 
+
+For measuring consistency, I used a for loop to run 100 iterations. 
+In each iteration, I used the .uuid4() function to generate a unique 
+id for each test iteration. Then I sent a POST request to the US 
+region instance. After that, I sent a GET request to the Europe region 
+instance, and stored the response. Then, I checked if the user id I 
+had generated earlier is present in the response, and kept track of 
+how many usernames are missed using a variable that gets incremented 
+if the user id is not in the response. In the end I printed the number 
+of consistency misses. 
