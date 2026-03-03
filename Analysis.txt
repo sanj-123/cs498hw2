@@ -1,0 +1,26 @@
+Average latency measurements from Part IV-A:
+US-central1 /register: 0.03817 seconds
+US-central1 /list: 0.03707 seconds
+Europe-west1 /register: 0.20371 seconds
+Europe-west1 /list: 0.20295 seconds 
+
+Consistency test results from Part IV-B: 0 consistency misses (the username was not found 0 times)
+
+Discussion of findings:
+The latencies between the two regions differ because the Firestore database is in the US-central1 
+region. Therefore, it takes less time and distance for the data to travel when the US-central1 
+server reads or writes to the database, as opposed to the Europe-west1 region which is further away 
+from the database, therefore making the distance and time larger. So, the latency for the Europe 
+region is larger than the latency for the US region. Additionally, the latency for /register is 
+larger than the latency for /list because write operations take longer since the database has to make 
+sure that the data is there and changes have to be made. Reading on the other hand doesn't involve
+making any changes, so it takes less time since it just involves obtaining what already exists in 
+the database. Writing also has other aspects that can contribute to the high latency, like 
+replication, which is relevant for databases that are sharded, like the firestore database we are 
+using. 
+
+For my consistency test, the output did not show eventual consistency since the number of 
+consistency misses turned out to be 0. Although this contrasts the general expectation of the 
+system eventually being consistent over time, since the stale data couldn't be viewed it suggests 
+that the amount of time the request was stale was less than the amount of time taken for the request 
+to be sent to the server, so the time delay was too small to notice the eventual consistency.

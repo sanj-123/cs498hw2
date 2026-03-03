@@ -3,12 +3,12 @@ I used the requests library to send requests from my local computer
 to the cloud instances. 
 
 For measuring latency, I used the .time() function to keep track of 
-the time before sending a GET request to each instance and after 
-getting a response, then subtracted the start and end times to get 
-the total time elapsed for the process. I iterated the test 10 times 
-and divided the total time by 10 to get the average latency. At the 
-end, I printed the average latency for each endpoint (/register and 
-/list) on each instance. 
+the time before and after sending a POST request to each instance, 
+then subtracted the start and end times to get the total time elapsed for 
+the process. I iterated the test 10 times and divided the total time by 10 
+to get the average latency. At the end, I printed the average latency for each
+endpoint (/register and /list) on each instance. I also made sure to clear the database
+at the beginning. 
 
 For measuring consistency, I used a for loop to run 100 iterations. 
 In each iteration, I used the .uuid4() function to generate a unique 
